@@ -1,0 +1,3 @@
+*.JPG
+node_modules/
+/config.js

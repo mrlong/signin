@@ -1,0 +1,16 @@
+{
+  "name": "signin",
+  "description": "signin application",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "ejs" : "*",
+    "wechat":"*",
+    "wechat-api":"*",
+    "mysql":"*",
+    "body-parser":"*",
+    "express-session":"*",
+    "cookie-parser":"*"
+  }
+}
