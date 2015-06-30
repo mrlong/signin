@@ -10,7 +10,7 @@ create table if not exists meeting (
   meet_guid  varchar(36) not null comment '唯一号',
   meet_title varchar(250) not null comment '会议主题',
   meet_time timestamp not null comment '开始时间',
-  meet_stop tinyint(1) default false comment '==ture 表示停止',
+  meet_status int default 0 comment '0 表示停止 1=报名 ',
   
   primary key(meet_guid)
 ) engine=innodb  default charset=utf8 comment='会议';

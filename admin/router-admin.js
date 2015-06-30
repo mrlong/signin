@@ -8,10 +8,8 @@ router.use(function(req,res,next){
   next(); 
 });
 
+router.use('/import',require('./controller/import'));
 router.use('/',require('./controller/index'));
-
-
-
 
 
 module.exports=router;

@@ -5,6 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var config = require('./config');
 
 
 
@@ -14,6 +15,7 @@ var session = require('express-session');
 var app = express();
 module.exports = app;
 
+  
 app.response.loadview=function(filename,params,ismoble){
   var myismoble;
   var myparams = {};
@@ -52,7 +54,7 @@ app.response.msgbox=function(msg,ismoble){
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public',{ maxAge: 86400000 }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/upload'));
 
 app.set('views', path.join(__dirname, './'));
 app.set('view engine', 'html');
@@ -66,9 +68,6 @@ app.use(session({
   key: 'signinapp', 
   cookie: { secure: false,maxAge: 1000 * 60 * 60 * 24 * 1 }  //1天保存
 }));
-
-
-
 
 
 app.use('/admin',require('./admin/router-admin'));
