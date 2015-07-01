@@ -19,7 +19,7 @@ var menu = {
         {
           "type":"view",
           "name":"了解擎洲",
-          "url":"sss"
+          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208152530&idx=1&sn=e3f39519c66285b8f9082a4ab21946c3"
         },
         {
           "type":"click",
@@ -45,18 +45,18 @@ var menu = {
         {
           "type":"view",
           "name":"热门活动",
-          "url":""  
+          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208152530&idx=1&sn=e3f39519c66285b8f9082a4ab21946c3"  
         },
         
         {
           "type":"view",
           "name":"行业资讯",
-          "url":""
+          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208361083&idx=2&sn=ad3bd35bd21de7c5ce7765c0171030a3"
         },
         {
           "type":"view",
           "name":"法律法规",
-          "url":""
+          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208361083&idx=2&sn=ad3bd35bd21de7c5ce7765c0171030a3"
         }
         
       ]
