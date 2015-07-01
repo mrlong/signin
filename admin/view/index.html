@@ -2,6 +2,7 @@
   
 <style>
 
+
   .table tbody tr th{
     border-top: 0px solid #ddd;
   }
@@ -24,7 +25,11 @@
     <tr>
       <td><%=row.meet_title%></td> 
       <td><%=row.meet_time%></td> 
-      <td><%=row.meet_status==0?'停止':'报名'%></td> 
+      <td>
+        <% if(row.meet_status==0){%> <span class="label label-danger">结束</span> <%}%>  
+        <% if(row.meet_status==1){%> <span class="label label-info">报名</span> <%}%>
+        <% if(row.meet_status==2){%> <span class="label label-success">签到</span> <%}%>
+      </td> 
       <td><a href="/admin/import/<%=row.meet_guid%>">导入名单</a> 监控签到 <a>更多...</a></td>
     </tr>  
   <% }) %>
