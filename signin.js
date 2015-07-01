@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var config = require('./config');
+var wechat=require('wechat');
 
 
 
@@ -71,6 +72,16 @@ app.use(session({
 
 
 app.use('/admin',require('./admin/router-admin'));
+
+//微信
+app.use('/wechat', wechat(config.wechat.token, function (req, res, next){
+  var message = req.weixin;
+  //只有自己才能发信息
+  //这地方可以处理权限
+  next(); 
+}),require('./wechat'));
+require('./wechat/menu').createmenu();
+
 app.use('/',function(req,res,next){
   //直接转向后台无
   res.redirect('/admin');

@@ -34,12 +34,18 @@ create table if not exists meeting_usr (
 create table if not exists users (
   user_openid varchar(50) not null comment 'openid',
   user_phone varchar(11),
+  user_nickname varchar(50),
+  user_sex integer,
+  user_city varchar(50),
+  user_province varchar(50),
+  user_country varchar(50),
+  user_status integer default 0 comment '=1 表示不关注了',
   
   user_headimgurl_0 longblob comment '头像0=640*640',
-  user_headimgurl_46 blob comment '头像46',
-  user_headimgurl_64 blob comment '头像64',
-  user_headimgurl_96 blob comment '头像96',
-  user_headimgurl_132 blob comment '头像132',
+  user_headimgurl_46 longblob comment '头像46',
+  user_headimgurl_64 longblob comment '头像64',
+  user_headimgurl_96 longblob comment '头像96',
+  user_headimgurl_132 longblob comment '头像132',
   
   primary key(user_openid)
 ) engine=innodb  default charset=utf8 comment='粉丝';
