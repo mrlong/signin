@@ -11,6 +11,7 @@
     "mysql":"*",
     "body-parser":"*",
     "express-session":"*",
-    "cookie-parser":"*"
+    "cookie-parser":"*",
+    "urllib":"*"
   }
 }
