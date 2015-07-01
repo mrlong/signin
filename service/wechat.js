@@ -69,7 +69,7 @@ exports.subscribe = function(user,fn){
   var mythis = this;
   Db.query('select user_openid from user where user_openid=?',[user.openid],function(err,rows){
       //已存在，只做更新了。
-      if(rows.length>0){  
+      if(rows && rows.length>0){  
         mythis.updateuserinfo(user,function(err){
           if(fn)fn(err,false);
         }); 
