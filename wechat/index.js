@@ -39,7 +39,7 @@ var link = require('./action/link');
 module.exports = function(req,res,next){
   
   var message = req.weixin;
-  config.debug || console.log(message);
+  console.log(message);
   
   //'text', 'image', 'voice', 'video', 'location', 'link', 'event'
   if (message.MsgType=='text') {text(message,req,res,next)};

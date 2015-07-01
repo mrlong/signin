@@ -78,6 +78,7 @@ app.use('/wechat', wechat(config.wechat.token, function (req, res, next){
   var message = req.weixin;
   //只有自己才能发信息
   //这地方可以处理权限
+  console.log(message);
   next(); 
 }),require('./wechat'));
 require('./wechat/menu').createmenu();
