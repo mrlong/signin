@@ -106,3 +106,36 @@ exports.unsubscribe = function(openid,fn){
     if(fn)fn(err);
   });
 };
+
+//
+// 扫一扫发生的事件
+// { ToUserName: 'gh_8becb66494ae',
+//  FromUserName: 'o5-CDjkrJNC-_MuH_w1mBxjMQnUw',
+//  CreateTime: '1435801654',
+//  MsgType: 'event',
+//  Event: 'SCAN',
+//  EventKey: '1',
+//  Ticket: 'gQGd8ToAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL01IV0dsUTdsNWdTZk5XTlJUVmtqAAIEx5SUVQMEAAAAAA==' }
+// 参数： event 
+// 返回值:  err ,content (微信的回复内容)
+//
+
+exports.SCAN=function(event,fn){
+  var key = parseInt(event.EventKey);
+  var content;
+  Db.query('select * from meeting where meet_status !=0 and meet_sceneid=?',key,function(err,rows){
+    if(!err && rows.length>0){
+      content = eval('(' + rows[0].meet_content + ')');
+      if(content){
+        if(fn) fn(null,content);  
+      }
+      else{
+        if(fn) fn(new Error('编辑回复内容的格式出错'));     
+      }
+    }
+    else{
+      if(fn) fn(err); 
+    }
+  });
+  
+}

@@ -60,21 +60,7 @@ var menu = {
         }
         
       ]
-   },
-   {
-     "name":"擎洲云",
-     "sub_button":[
-       {  
-         "type":"view",
-         "name":"签到",
-         "url":client.getAuthorizeURL(config.domain + "/admin") 
-       },
-       {
-         "type":"click",
-         "name":"赞一下我们",
-         "key":"V1001_GOOD"
-       }]
-  }]
+   }]
 };
 
 
