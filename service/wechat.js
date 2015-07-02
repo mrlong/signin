@@ -134,7 +134,7 @@ exports.SCAN=function(event,fn){
     if(!err && rows.length>0){
       console.log(rows[0].meet_content);
       content = eval('(' + rows[0].meet_content + ')');
-      if(content){
+      if(content && content instanceof Array){
         if(fn) fn(null,content);  
       }
       else{

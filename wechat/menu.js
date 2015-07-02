@@ -51,7 +51,7 @@ var menu = {
         {
           "type":"view",
           "name":"行业资讯",
-          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208361083&idx=2&sn=ad3bd35bd21de7c5ce7765c0171030a3"
+          "url":"http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MjM5MTAwNzQ2Mw==#wechat_webview_type=1&wechat_redirect"
         },
         {
           "type":"view",
