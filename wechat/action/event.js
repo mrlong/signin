@@ -78,7 +78,7 @@ module.exports = function(event, req, res, next){
                 "擎洲嘉嘉：1337222357"
       );
     }
-    else if(event.EventKey=='V1003'){
+    else if(event.EventKey=='V1002'){
       
       var msg="擎洲公司24小时服务热线" +
       "计价及其他服务热线：400-001-9090" +
@@ -113,7 +113,7 @@ module.exports = function(event, req, res, next){
         "擎洲广达衢州群 82711220" +
         "擎洲公路软件交流群 258613816" +
         "擎洲水利计价群 46206438" +
-        "擎洲资料软件交流群 331285379" +
+        "擎洲资料软件交流群 331285379" ;
 
       res.reply(msg);   
     }
