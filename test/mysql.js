@@ -50,3 +50,9 @@ Db.query('select * from meeting order by meet_time desc ',function(err,rows){
   console.log('The solution is: ', rows);
   
 });
+
+
+Db.query('select user_openid from users where user_openid=?',['ssss'],function(err,rows){
+  console.log(err);
+  console.log(rows);
+})

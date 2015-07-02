@@ -67,7 +67,7 @@ var donwloaduserheadimg = function(user,fn){
 //fn : err,isfirst=表示第一次关注
 exports.subscribe = function(user,fn){
   var mythis = this;
-  Db.query('select user_openid from user where user_openid=?',[user.openid],function(err,rows){
+  Db.query('select user_openid from users where user_openid=?',[user.openid],function(err,rows){
       //已存在，只做更新了。
       if(rows && rows.length>0){  
         mythis.updateuserinfo(user,function(err){
@@ -85,7 +85,7 @@ exports.subscribe = function(user,fn){
         indata.user_country = user.country;
         indata.trim();
         
-        Db.query('insert into user set ?',indata,function(err,rows){
+        Db.query('insert into users set ?',indata,function(err,rows){
           //下载头像图片
           donwloaduserheadimg(user,function(err){
             if(fn) fn(err,true);
@@ -100,7 +100,7 @@ exports.subscribe = function(user,fn){
 // 用户取消关注了
 //
 exports.unsubscribe = function(openid,fn){
-  Db.query('update user set user_status=1 where user_openid=?',
+  Db.query('update users set user_status=1 where user_openid=?',
            [openid],function(err){
     if(fn)fn(err);
   });
