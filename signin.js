@@ -68,6 +68,7 @@ app.use(session({
 
 
 app.use('/admin',require('./admin/router-admin'));
+app.use('/m',require('./moblie/router-moblie'));
 
 //微信
 app.use('/wechat',require('./wechat'));
