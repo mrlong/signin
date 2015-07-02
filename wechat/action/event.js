@@ -22,7 +22,7 @@
 var User = require('../../service/wechat.js');
 
 module.exports = function(event, req, res, next){
-  
+  console.log(event);
   //关注
   if (event.Event === 'subscribe') {
     User.getuser(event.FromUserName,function(err,data){
@@ -48,7 +48,6 @@ module.exports = function(event, req, res, next){
     
   }
   else if (event.Event =='CLICK'){
-    console.log(event);
     if(event.EventKey=='V1002'){
       res.reply("擎洲公司客服QQ竭诚为您服务：" +
                 "计价、招投标类软件：" +
