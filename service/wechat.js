@@ -121,18 +121,23 @@ exports.unsubscribe = function(openid,fn){
 //
 
 exports.SCAN=function(event,fn){
-  //
   
   if(event.EventKey.indexOf('qrscene_')>=0){
     var key = parseInt(event.EventKey.substring(8));  
   }
   else{
     var key = parseInt(event.EventKey);
+    
+    //有可能已关注了，但功能后开发，用户信息没有及时更新。
+    Api.getUser(event.FromUserName,function(err,data){
+      if(!err){
+        donwloaduserheadimg(data);
+      }
+    });
   }
   var content;
   Db.query('select * from meeting where meet_status !=0 and meet_sceneid=?',key,function(err,rows){
     if(!err && rows.length>0){
-      console.log(rows[0].meet_content);
       content = eval('(' + rows[0].meet_content + ')');
       if(content && content instanceof Array){
         if(fn) fn(null,content);  
