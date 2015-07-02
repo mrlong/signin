@@ -94,6 +94,7 @@ module.exports = function(event, req, res, next){
     console.log('aaa');
     User.SCAN(event,function(err,content){
       console.log('111');
+      console.log(content);
       if(!err){
         res.reply(content); 
       }
