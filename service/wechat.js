@@ -45,7 +45,7 @@ var donwloaduserheadimg = function(user,fn){
         urllib.request(img_url96,{},function(err,img196){
           urllib.request(img_url132,{},function(err,img132){
             Db.query('update users set user_headimgurl_0=?,user_headimgurl_46=?,user_headimgurl_64=?,' + 
-                     'user_headimgurl_96=?,user_headimgurl_132=?  where user_openid=?',
+                     'user_headimgurl_96=?,user_headimgurl_132=?,user_status=0  where user_openid=?',
                      [img0,img46,img64,img196,img132,user.openid],function(err){
                 config.debug || console.log( err?'获取用户的头像出错'+err:'获取用户的头像成功');
             });     
