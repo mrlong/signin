@@ -121,7 +121,14 @@ exports.unsubscribe = function(openid,fn){
 //
 
 exports.SCAN=function(event,fn){
-  var key = parseInt(event.EventKey);
+  //
+  
+  if(event.EventKey.indexOf('qrscene_')>=0){
+    var key = parseInt(event.EventKey.substring(8));  
+  }
+  else{
+    var key = parseInt(event.EventKey);
+  }
   var content;
   Db.query('select * from meeting where meet_status !=0 and meet_sceneid=?',key,function(err,rows){
     if(!err && rows.length>0){
@@ -134,8 +141,12 @@ exports.SCAN=function(event,fn){
       }
     }
     else{
-      if(fn) fn(err); 
+      if(err){
+        if(fn) fn(err);
+      }
+      else{
+        if(fn) fn(new Error('没有参与的活动'));  
+      }
     }
   });
-  
-}
+};

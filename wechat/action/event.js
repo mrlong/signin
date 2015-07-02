@@ -28,7 +28,20 @@ module.exports = function(event, req, res, next){
     User.getuser(event.FromUserName,function(err,data){
       if(!err){
         User.subscribe(data,function(err,isfirst){
-          res.reply(isfirst?'感谢你关注擎洲公司官方唯一微信公众账号。':'感谢你再次关注擎洲公司官方唯一微信公众账号，说好不允许走了。');          
+          
+          if(event.EventKey.indexOf('qrscene_')>=0){
+            User.SCAN(event,function(err,content){
+              if(!err){
+                res.reply(content); 
+              }
+              else{
+                res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+              }
+            });
+          }
+          else{
+            res.reply(isfirst?'感谢你关注擎洲公司官方唯一微信公众账号。':'感谢你再次关注擎洲公司官方唯一微信公众账号，说好不允许走了。');          
+          }
         });
       }
       else{
@@ -78,8 +91,9 @@ module.exports = function(event, req, res, next){
   }
   /////////////////////////////////////// 已关注之后，扫二维的事件//////////////////////////////////////
   else if(event.Event =='SCAN'){
-    
+    console.log('aaa');
     User.SCAN(event,function(err,content){
+      console.log('111');
       if(!err){
         res.reply(content); 
       }
