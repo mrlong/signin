@@ -65,7 +65,7 @@ var donwloaduserheadimg = function(user,fn){
 //关注信息。
 //user 为 api.getuser() 取出的返回值
 //fn : err,isfirst=表示第一次关注
-exports.subscribe = function(user,fn){
+var dosubscribe = function(user,fn){
   var mythis = this;
   Db.query('select user_openid from users where user_openid=?',[user.openid],function(err,rows){
       //已存在，只做更新了。
@@ -95,6 +95,7 @@ exports.subscribe = function(user,fn){
       }
     });   
 };
+exports.subscribe = dosubscribe;
 
 
 //
@@ -130,7 +131,7 @@ exports.SCAN=function(event,fn){
     
     //有可能已关注了，但功能后开发，用户信息没有及时更新。
     Api.getUser(event.FromUserName,function(err,data){
-      if(!err){this.subscribe(data);}
+      if(!err){dosubscribe(data);}
     });
   }
   var content;
