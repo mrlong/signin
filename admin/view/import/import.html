@@ -1,4 +1,4 @@
-<% include header.html %>
+<% include ../header.html %>
   
 <style>
 
@@ -15,6 +15,7 @@
     line-height: 0.7; 
   }
   
+
 </style>
   
 <script>
@@ -48,13 +49,16 @@
   <h1>导入名单 <small>-必须指定的模板生成的数据，<a href="/import.csv">模板下载点击</a>。</small></h1>
 </div>
 
-<div>  
+<div>
+
+  <div id="help">
   <p class="lead">1. 文件可以记事本打开，并显示出图示的格式,<a href="/img/importview.png" target="_blank">见图示</a>。</p>
   <p class="lead">2. 导入如发现有乱码，用写字板打开转为utf8格式，<a href="/img/impututf8.png" target="_blank">见图示</a>。</p>
   <p class="lead">3. 如果已经开始报名了，再导入数据将会覆盖报名的信息。</p>
   <% if(rowcount>0){ %>
     <p class="lead">4.当前会议已有<strong><%=rowcount%></strong>条数据，导入之后将会覆盖掉。</p>
-  <%}%>  
+  <%}%>
+  </div>
     
   <div class="row">
     <div class="col-md-4">
@@ -76,4 +80,4 @@
 </div>
 
   
-<% include footer.html %>
+<% include ../footer.html %>

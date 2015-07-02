@@ -11,8 +11,8 @@ create table if not exists meeting (
   meet_title varchar(250) not null comment '会议主题',
   meet_time timestamp not null comment '开始时间',
   meet_status int default 0 comment '0 表示结束 1=报名 2=签到 ',
-  meet_sceneid int not null commit '二维码编号',
-  meet_content text commit '回复内容',
+  meet_sceneid int not null comment '二维码编号',
+  meet_content text comment '回复内容',
   
   primary key(meet_guid)
 ) engine=innodb  default charset=utf8 comment='会议';

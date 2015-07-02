@@ -38,7 +38,7 @@ app.response.loadview=function(filename,params,ismoble){
   }
 };
 
-app.response.msgbox=function(msg,ismoble){
+app.response.msgBox=function(msg,ismoble){
   var myismoble;
   var viewstyle = this.viewstyle || 'home';
   

@@ -137,7 +137,7 @@ exports.SCAN=function(event,fn){
   var content;
   Db.query('select * from meeting where meet_status !=0 and meet_sceneid=?',key,function(err,rows){
     if(!err && rows.length>0){
-      content = eval('(' + rows[0].meet_content + ')');
+      content = eval('([' + rows[0].meet_content + '])');
       if(content && content instanceof Array){
         if(fn) fn(null,content);  
       }

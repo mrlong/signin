@@ -1,10 +1,11 @@
-<% include header.html %>
+<% include ../header.html %>
   
 <style>
 
 
   .table tbody tr th{
     border-top: 0px solid #ddd;
+
   }
   
 </style>
@@ -30,11 +31,21 @@
         <% if(row.meet_status==1){%> <span class="label label-info">报名</span> <%}%>
         <% if(row.meet_status==2){%> <span class="label label-success">签到</span> <%}%>
       </td> 
-      <td><a href="/admin/import/<%=row.meet_guid%>">导入名单</a> 监控签到 <a>更多...</a></td>
+      <td >
+        <div nowrap class="dropdown" style="">
+        <a href="/admin/import/<%=row.meet_guid%>">名单</a>
+        <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" >更多</a><span class="caret"></span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="/admin/edit/<%=row.meet_guid%>">修改</a></li>
+          <li><a href="/admin/import/<%=row.meet_guid%>">导入名单</a></li>
+          <li><a href="#">监控签到</a></li>
+        </ul>
+        </div>
+      </td>
     </tr>  
   <% }) %>
     
   </table>
 </div>
   
-<% include footer.html %>
+<% include ../footer.html %>

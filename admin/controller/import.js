@@ -9,10 +9,10 @@ router.get('/:guid',function(req,res,next){
   
   Db.query('select count(*) as rowcount from meeting_usr order by meus_phone',function(err,rows){
     if(!err){
-      res.loadview('import.html',{rowcount:rows[0].rowcount,meet_guid:myguid}); 
+      res.loadview('import/import.html',{rowcount:rows[0].rowcount,meet_guid:myguid}); 
     }
     else{
-      res.msgbox('出错');
+      res.msgBox('出错');
     }
   });
   
