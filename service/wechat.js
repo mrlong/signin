@@ -130,7 +130,7 @@ exports.SCAN=function(event,fn){
     
     //有可能已关注了，但功能后开发，用户信息没有及时更新。
     Api.getUser(event.FromUserName,function(err,data){
-      if(!err){subscribe(data);}
+      if(!err){this.subscribe(data);}
     });
   }
   var content;
