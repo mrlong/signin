@@ -47,7 +47,7 @@ var donwloaduserheadimg = function(user,fn){
             Db.query('update users set user_headimgurl_0=?,user_headimgurl_46=?,user_headimgurl_64=?,' + 
                      'user_headimgurl_96=?,user_headimgurl_132=?,user_status=0,user_nickname=?,user_city=?,user_province=?,user_country=?  where user_openid=?',
                      [img0,img46,img64,img196,img132,user.openid,user.nickname,user.city,user.province,user.country],function(err){
-                config.debug || console.log( err?'获取用户的头像出错'+err:'获取用户的头像成功');
+                config.debug || console.log( err?'获取用户的头像出错'+err:'获取用户的头像成功success');
             });     
           });
         });
@@ -83,6 +83,7 @@ exports.subscribe = function(user,fn){
         indata.user_city = user.city;
         indata.user_province = user.province;
         indata.user_country = user.country;
+        indata.user_status = 0;
         indata.trim();
         
         Db.query('insert into users set ?',indata,function(err,rows){
