@@ -28,8 +28,15 @@ module.exports = function(event, req, res, next){
     User.getuser(event.FromUserName,function(err,data){
       if(!err){
         User.subscribe(data,function(err,isfirst){
-          res.reply(isfirst?'感谢你关注擎洲公司官方唯一微信公众账号。':'感谢你再次关注擎洲公司官方唯一微信公众账号，说好不允许走了。'); 
+          res.reply(isfirst?'感谢你关注擎洲公司官方唯一微信公众账号。':'感谢你再次关注擎洲公司官方唯一微信公众账号，说好不允许走了。');
+          
+          //如是扫描进来时
+          if(event.EventKey && event.EventKey.indexOf('qrscene')>0){
+            console.log(event);
+          };
+          
         });
+        
       }
       else{
         res.reply('无法获取你的信息，请取消关注。');    
@@ -76,6 +83,10 @@ module.exports = function(event, req, res, next){
     else{
       res.reply('不要随意的点，现在还不支持。');
     }
+  }
+  /////////////////////////////////////// 已关注之后，扫二维的事件//////////////////////////////////////
+  else if(event.Event =='SCAN'){
+    console.log(event);
   }
   else {
   	res.reply('暂未支持! Coming soon!-1');
