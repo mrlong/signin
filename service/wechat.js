@@ -45,8 +45,8 @@ var donwloaduserheadimg = function(user,fn){
         urllib.request(img_url96,{},function(err,img196){
           urllib.request(img_url132,{},function(err,img132){
             Db.query('update users set user_headimgurl_0=?,user_headimgurl_46=?,user_headimgurl_64=?,' + 
-                     'user_headimgurl_96=?,user_headimgurl_132=?,user_status=0  where user_openid=?',
-                     [img0,img46,img64,img196,img132,user.openid],function(err){
+                     'user_headimgurl_96=?,user_headimgurl_132=?,user_status=0,user_nickname=?,user_city=?,user_province=?,user_country=?  where user_openid=?',
+                     [img0,img46,img64,img196,img132,user.openid,user.nickname,user.city,user.province,user.country],function(err){
                 config.debug || console.log( err?'获取用户的头像出错'+err:'获取用户的头像成功');
             });     
           });
@@ -70,7 +70,7 @@ exports.subscribe = function(user,fn){
   Db.query('select user_openid from users where user_openid=?',[user.openid],function(err,rows){
       //已存在，只做更新了。
       if(rows && rows.length>0){  
-        mythis.updateuserinfo(user,function(err){
+        donwloaduserheadimg(user,function(err){
           if(fn)fn(err,false);
         }); 
       }
