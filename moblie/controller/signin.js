@@ -6,6 +6,7 @@ var Db = require('../../lib/db');
 
 router.get('/',function(req,res,next){
   var meet_guid = req.query.meet_guid;
+  var openid = req.query.openid;
   res.loadview('signin/index.html',{meet_guid:meet_guid});
 });
 

@@ -143,7 +143,7 @@ exports.SCAN=function(event,fn){
         for(var i=0;i<content.length;i++){
           if(content[i].url){ 
             content[i].url = content[i].url + (content[i].url.indexOf("?")<0?"?":"&") + "meet_guid=" + rows[0].meet_guid; 
-            console.log(content[i].url);
+            content[i].url = content[i].url + "&openid=" + event.FromUserName; //带上openid 为了后面取值之用。
           }
         };
         if(fn) fn(null,content);  
