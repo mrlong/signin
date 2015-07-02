@@ -1,0 +1,81 @@
+<% include ../header.html %>
+  
+<style>
+  .error{
+    color: red; 
+  }
+
+  #info{
+    font-size: 25px; 
+  }
+</style>
+
+
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    $('#phonecode').keydown(function(e){
+      if(e.keyCode==13){
+        var code = $("#phonecode").val();
+        alert(code);
+        //后面再加
+      }
+    });
+  });
+  
+</script>
+  
+<div class="page-header">
+  <h1>会议活动详情<small></small></h1>
+</div>
+
+<div class="container">
+  <div class="row">
+  
+    <div class="col-md-6" id="info">
+      <dl class="dl-horizontal">
+        <dt>会议主题</dt>
+        <dd><%=row.meet_title%></dd>
+      </dl>
+      
+      <dl class="dl-horizontal">
+        <dt>会议时间</dt>
+        <dd><%=row.meet_time%></dd>
+      </dl>
+      
+      <dl class="dl-horizontal">
+        <dt>状态</dt>
+        <dd>
+         <% if(row.meet_status==0){%> <span class="label label-danger">结束</span> <%}%>  
+         <% if(row.meet_status==1){%> <span class="label label-info">报名</span> <%}%>
+         <% if(row.meet_status==2){%> <span class="label label-success">签到</span> <%}%>
+        </dd>
+      </dl>
+      
+      <dl class="dl-horizontal">
+        <dt>二维码编号(<%=row.meet_sceneid%>)</dt>
+        <dd><img src="<%=qrcodeurl%>" width="200" height="200"></dd>
+      </dl>
+           
+      <dl class="dl-horizontal">
+        <dt style="color:red">没有微信签到</dt>
+        <dd><input id='phonecode' type="text" placeholder="输入手机号码" data-toggle="tooltip" data-placement="top" title="回车确定签到"></dd>
+      </dl>
+    
+    </div >  
+  
+ 
+    <div class="col-md-6">
+    
+    
+    </div>
+  </div>
+
+  
+</div>
+  
+  
+
+ 
+  
+<% include ../footer.html %>

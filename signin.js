@@ -9,10 +9,6 @@ var config = require('./config');
 var wechat=require('wechat');
 
 
-
-
-
-
 var app = express();
 module.exports = app;
 

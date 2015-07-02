@@ -135,7 +135,7 @@ exports.SCAN=function(event,fn){
     });
   }
   var content;
-  Db.query('select * from meeting where meet_status !=0 and meet_sceneid=?',key,function(err,rows){
+  Db.query('select * from meeting where meet_status !=0 and meet_sceneid=? order by meet_time desc ',key,function(err,rows){
     if(!err && rows.length>0){
       content = eval('([' + rows[0].meet_content + '])');
       if(content && content instanceof Array){
@@ -155,3 +155,21 @@ exports.SCAN=function(event,fn){
     }
   });
 };
+
+//
+// 取出永久二维码的地址
+// 参数： 1 为编号
+// 返回值:
+//  err, url
+exports.qrcodeurl=function(id,fn){
+  Api.createLimitQRCode(1,function(err,data){
+    if(!err && data.ticket){
+      if(fn) fn(null,Api.showQRCodeURL(data.ticket));
+    }
+    else {
+      if(fn) fn(err); 
+    }
+  }); 
+}
+
+
