@@ -141,7 +141,9 @@ exports.SCAN=function(event,fn){
       if(content && content instanceof Array){
         //在所路径后面增加当前会议的guid
         for(var i=0;i<content.length;i++){
-          if(content[i].url) content[i].url += "&meet_guid=" + rows[0].meet_guid; 
+          if(content[i].url){ 
+            content[i].url += content[i].url.indexOf('?')==0?"?":"&" + "meet_guid=" + rows[0].meet_guid;   
+          }
         };
         if(fn) fn(null,content);  
       }
