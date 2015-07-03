@@ -7,6 +7,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var config = require('./config');
 var wechat=require('wechat');
+var multer  = require('multer');  //上传组件
+var Db = require('./lib/db');
 
 
 var app = express();
@@ -66,6 +68,14 @@ app.use(session({
   cookie: { secure: false,maxAge: 1000 * 60 * 60 * 24 * 1 }  //1天保存
 }));
 
+app.use(multer({
+  dest: './upload',
+  rename: function (fieldname, filename) {
+    return Db.newGuid();
+  }
+}));
+
+
 
 app.use('/admin',require('./admin/router-admin'));
 app.use('/m',require('./moblie/router-moblie'));
@@ -83,3 +93,9 @@ app.use('/',function(req,res,next){
 
 app.listen(3001);
 console.log('signinapp  stated on port 3001');
+
+
+
+
+
+

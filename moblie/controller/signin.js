@@ -37,7 +37,14 @@ router.post('/',function(req,res,next){
         res.json({success:true,msg:"签到成功"});
         
         //发送信息
-        
+        Db.query('select meus_msg from meeting_usr where where meet_guid=? and meus_phone=?',
+                 [meet_guid,user_phone],function(err,rows){
+          if(!err && rows.length>0){
+            if(rows[0].meus_msg && rows[0].meus_msg.trim() !=''){
+              //处理信息了。  
+            };
+          };
+        });
       }
       else{
         res.json({success:false,msg:'签到失败，怀疑无签到数据或已经签到。'});   

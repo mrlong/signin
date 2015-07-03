@@ -43,8 +43,8 @@ router.post('/push/:guid',function(req,res,next){
                 if (values.length >=2){
                   var rowdata ={
                     meet_guid:meet_guid,
-                    meus_phone:values[0],
-                    meus_name:values[1],
+                    meus_name:values[0],
+                    meus_phone:values[1],
                     meus_unit:values[2],
                     meus_msg:values[3]
                   };
@@ -77,6 +77,31 @@ router.post('/push/:guid',function(req,res,next){
       res.json({success:false,msg:'清空原来的数据出错,'+ err}); 
     };
   });
+});
+
+
+router.post('/upload',function(req,res,next){
+  if (req.files && req.files.codecsv != 'undifined') {  
+    var temp_path = req.files.codecsv.path;  
+    if (temp_path) {  
+      
+      fs.readFile(temp_path, 'utf-8', function(err, content) {  
+        //文件的内容  
+        var csvfile = process.cwd() + '/upload/import.csv';
+        fs.writeFileSync(csvfile,content);
+        // 删除临时文件  
+        fs.unlink(temp_path);  
+        res.json({success:true,msg:'上传的文件成功。'});
+      }); 
+      
+    }
+    else{
+      res.json({success:false,msg:'无法获取上传的文件。'});  
+    }
+  }
+  else{
+    res.json({success:false,msg:'无法获取上传的文件。'})  
+  }
 });
 
 

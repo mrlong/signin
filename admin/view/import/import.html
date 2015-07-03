@@ -40,7 +40,47 @@
         };
       });
     });
-  
+
+    //上传文件
+    $("#doupload").on('click',function(){
+      var files = $('#file')[0].files; 
+      var data = new FormData(); 
+      if (files.length>0) {  
+        
+        //name: "sqlResult_152606.csv"size: 548738type: "application/vnd.ms-excel"
+        if(files[0].name.indexOf('csv')>0 && files[0].type=="application/vnd.ms-excel"){
+          data.append('codecsv',files[0]);
+        }
+        else{
+          $("#msg").addClass('error');
+          $("#msg").text('你选择要上传的文件格式不是csv文件。');
+          return;   
+        }
+      }
+      else{
+        $("#msg").addClass('error');
+        $("#msg").text('请在选择要上传的文件，在铵钮的左边。');
+        return;
+      }
+      
+      $.ajax({  
+        cache: false,  
+        type: 'post',  
+        dataType: 'json',  
+        url:'upload',                     
+        data : data,  
+        contentType: false,  
+        processData: false,  
+        success : function (result) {
+          result.success==true?$("#msg").removeClass('error'):$("#msg").addClass('error');
+          $("#msg").text(result.msg);   
+        }
+        
+      });
+      
+    
+      
+    });
   });
   
 </script>
@@ -59,12 +99,14 @@
     <p class="lead">4.当前会议已有<strong><%=rowcount%></strong>条数据，导入之后将会覆盖掉。</p>
   <%}%>
   </div>
+      
+  <input type="file" name="filename" id="file" />
     
   <div class="row">
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-      <button type="button" class="btn btn-warning btn-lg btn-block">1.上传文件</button>
+      <button id="doupload" type="button" class="btn btn-warning btn-lg btn-block">1.上传文件</button>
       <button id="doimport" type="button" class="btn btn-danger btn-lg btn-block">2.开始导入</button>
     </div>
     

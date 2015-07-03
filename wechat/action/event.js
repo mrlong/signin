@@ -22,7 +22,7 @@
 var User = require('../../service/wechat.js');
 
 module.exports = function(event, req, res, next){
-  console.log(event);
+  //console.log(event);
   //关注
   if (event.Event === 'subscribe') {
     User.getuser(event.FromUserName,function(err,data){
