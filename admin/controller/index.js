@@ -71,8 +71,8 @@ router.post('/add',function(req,res,next){
 
 });
 
-//详情
 
+//详情
 router.get('/info/:guid',function(req,res,next){
   var myguid = req.params.guid;
   Db.query('select *,DATE_FORMAT(meet_time, "%Y-%m-%d") AS meet_time  from meeting where meet_guid=?',myguid,function(err,rows){
@@ -89,9 +89,19 @@ router.get('/info/:guid',function(req,res,next){
       res.msgBox('读取出错'+err); 
     }
   });
-  
 });
 
+router.get('/info/pic/:guid',function(req,res,next){
+  var myguid = req.params.guid;
+  Db.query('select count(*) as total,meus_sginin from meeting_usr where meet_guid=? group by meus_sginin ',myguid,function(err,rows){
+    if(!err && rows.length>0){
+      res.json({success:true,msg:'成功',data:rows}); 
+    }
+    else{
+      res.json({success:false,msg:'读取出错'+err}) 
+    }
+  });
+});
 
 router.get('/users/:guid',function(req,res,next){
   var myguid = req.params.guid;
