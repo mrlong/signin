@@ -1,0 +1,81 @@
+<% include ../header.html %>
+  
+<style>
+  .error{
+    color: red; 
+  }
+  
+  .table tbody tr th{
+    border-top: 0px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr img {
+    width: 30px;
+    height: 30px;
+
+  }
+  
+  
+  
+</style>
+
+
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+   
+  });
+  
+</script>
+  
+<div class="page-header">
+  <h1>会议名单<small>-<%=meeting.meet_title%></small></h1>
+</div>
+
+<div class="container-full">
+  
+<div>
+  <table class="table table-hover">
+    <tr>
+      <th>#</th>
+      <th> 姓名</th>
+      <th> 电话</td>
+      <th> 单位</td>
+      <th> 状态</td>
+      <th> 签到回复内容</td>
+    </tr>
+  <% var rowno=1; rows.forEach(function(row){ %> 
+    <tr>
+      <td><%=rowno++%></td>
+      
+        <% if(row.meus_sginin == true) {%>
+          <td>
+          <img src="/admin/user/headimg/<%=row.meus_openid?row.meus_openid:'11'%>" class="img-circle"> 
+          <%=row.meus_name%>
+           </td> 
+        <%} else {%>
+          <td style="padding-left: 40px;"> 
+          <%=row.meus_name%>
+          </td> 
+        <%}%>
+        
+     
+      <td><%=row.meus_phone%></td>
+      <td><%=row.meus_unit%></td>
+      <td>
+        <% if(row.meus_sginin==true){%> <span class="label label-success">签到</span> <%}%>  
+      </td> 
+      <td><%=row.meus_msg%></td>
+    </tr>  
+  <% }) %>
+    
+  </table>
+</div>
+          
+  
+</div>
+
+
+  
+<% include ../footer.html %>

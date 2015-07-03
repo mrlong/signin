@@ -35,7 +35,7 @@ router.post('/push/:guid',function(req,res,next){
             var rowyes = 0; //有效数据行
             var rownot = 0; //无效数据行
             data.split('\n').forEach(function(row){
-              console.log(row);
+              //console.log(row);
               ++rowcount;
               //第五行之后才算是正式数据
               if (rowcount>5){

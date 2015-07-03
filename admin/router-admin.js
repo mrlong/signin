@@ -9,6 +9,7 @@ router.use(function(req,res,next){
 });
 
 router.use('/import',require('./controller/import'));
+router.use('/user',require('./controller/user'));
 router.use('/',require('./controller/index'));
 
 

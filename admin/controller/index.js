@@ -92,6 +92,25 @@ router.get('/info/:guid',function(req,res,next){
   
 });
 
+
+router.get('/users/:guid',function(req,res,next){
+  var myguid = req.params.guid;
+  Db.query('select * from meeting where meet_guid=?',myguid,function(err,meeting){
+    
+    if(!err && meeting.length>0){
+      Db.query('select * from meeting_usr where meet_guid=? order by meus_name ',myguid,function(err,rows){
+        res.loadview('index/users.html',{meeting:meeting[0],rows:rows});
+      });  
+    }
+    else{
+      res.msgbox('无效的会议活动。') 
+    }
+  });
+});
+
+
+
+
 router.get('/',function(req,res,next){
   //%H:%i:%s
   Db.query('select *,DATE_FORMAT(meet_time, "%Y-%m-%d ") AS meet_time from meeting order by meet_time desc',function(err,rows){
