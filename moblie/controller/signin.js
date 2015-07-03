@@ -35,6 +35,9 @@ router.post('/',function(req,res,next){
     if(!err){
       if(rows.changedRows>0){
         res.json({success:true,msg:"签到成功"});
+        
+        //发送信息
+        
       }
       else{
         res.json({success:false,msg:'签到失败，怀疑无签到数据或已经签到。'});   

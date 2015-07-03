@@ -19,7 +19,7 @@ var link = require('./action/link');
  res.send('Hello World-wechat');
 });*/
 
-var mywechat = wechat(config.wechat.token, 
+var mywechat = wechat(config.wechat /*config.wechat.token*/, 
   wechat.text(text)      //文本
     .image(image)        //图片
     .location(location)  //位置
