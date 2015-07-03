@@ -24,7 +24,7 @@ router.get('/',function(req,res,next){
 router.post('/',function(req,res,next){
   
   var openid = req.body.openid;
-  var meet_guid = 'qqq';// req.body.meet_guid;
+  var meet_guid = req.body.meet_guid;
   var user_phone = req.body.user_phone;
   var user_phone_old = req.body.user_phone_old; //原来老的，如不一样则要写入库了。
   
