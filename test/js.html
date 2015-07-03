@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+<style>
+  body{
+    font-size: 30px;
+    font-family: "microsoft yahei"; 
+  };
+  div{
+    display: block; 
+  };
+</style>
+  
+<script language='javascript' >
+    var btnsignin = document.getElementById("btnsignin");
+    if(btnsignin){
+      btnsignin.onclick=function(){
+        alert('sss');
+      };
+    };
+          
+</script>
+  
+<body>
+
+
+  
+<div>输入你的手机号码</div>
+<div>
+<input type="number" value="<%=user_phone%>">
+</div>
+
+<div>
+<button id="btnsignin" type="button">点击签到</button>
+</div>
+
+</body>
+</html>
+

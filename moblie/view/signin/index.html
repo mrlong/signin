@@ -1,5 +1,121 @@
-<% include ../header.html %>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
-<h1><%=meet_guid%></h1>
+<style>
+  body{
+    text-align: center;
+    font-size: 30px;
+    font-family: "microsoft yahei"; 
+    margin: 20px;
+  }
   
-<% include ../footer.html %>
+  input{
+    font-size: 50px;
+    height: 60px;
+    width: 100%;
+    letter-spacing:6px
+  }
+  
+  button{
+    margin-top: 20px;
+    height: 60px;
+    width: 80%;
+    letter-spacing:3px;
+    font-size: 50px;
+    background-color: #1bd486;
+  }
+</style>
+
+  
+<body>
+  
+  <div style="padding-bottom: 20px;padding-top: 20px;" >输入你的手机号码</div>
+  <div>
+  <input type="number" id="user_phone" value="<%=user_phone%>" />
+  </div>
+  
+  <div>
+  <button id="btnsignin" class="abc" type="button">点击签到</button>
+  </div>
+  
+  <div id="msg" style="padding-bottom: 20px;padding-top: 20px;font-size:40px;" ></div>
+
+</body>
+  
+<script language='javascript'>
+    
+    function writelog(str){
+      document.getElementById('msg').innerHTML=str;
+      document.getElementById('msg').style.color="blue";
+    };
+    function success(){
+      document.getElementById("btnsignin").style.display="none";
+      writelog("签到成功。。。");
+    };
+    
+    function failure(msg){
+      writelog(msg);
+      document.getElementById('msg').style.color="red";
+    };
+  
+    var XMLHttpReq = new XMLHttpRequest();
+    function processResponse() {  
+      if (XMLHttpReq.readyState == 4) {  
+        if (XMLHttpReq.status == 200) {  
+            var text = XMLHttpReq.responseText;  //返回值
+            var data = eval('(' + text + ')');
+            if (data.success == true){
+              writelog(data.msg);
+            }
+            else{
+              failure(data.msg);  
+            };
+        }
+        else{
+          failure('连接服务器发生异常错误。');    
+        }
+      }
+      else if(XMLHttpReq.readyState == 1){
+        writelog('1发送签到请求');
+      }else if(XMLHttpReq.readyState == 2){
+        writelog('2已经接收签到请求响应内容');
+      }else if(XMLHttpReq.readyState == 3){
+        writelog('3服务器正在处理签到请求内容');
+      }
+    };
+  
+  
+    var btnsignin = document.getElementById("btnsignin");
+    if(btnsignin){
+      btnsignin.onclick=function(){
+        var phone = document.getElementById("user_phone");
+        var user_phone = phone.value;
+        if (user_phone.length!=11){
+          failure("电话号码有错误");
+          phone.focus();
+          return; 
+        };
+        
+        
+        var meet_guid = "<%=meet_guid%>";
+        var openid = "<%=openid%>";
+        var user_phone_old = "<%=user_phone_old%>";
+        
+        writelog('检验发送中，请稍候...');
+        btnsignin.disabled=true;
+        XMLHttpReq.open("post", '/m/signin', true);  
+        XMLHttpReq.onreadystatechange = processResponse; //指定响应函数
+        XMLHttpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=gbk");
+        XMLHttpReq.send("user_phone="+user_phone + "&meet_guid=" + meet_guid + 
+                        "&openid=" + openid + "&user_phone_old=" + user_phone_old); 
+        
+      };
+    };
+  
+    document.getElementById("user_phone").focus();
+</script>
+  
+</html>
