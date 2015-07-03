@@ -13,7 +13,7 @@
   }
   
   input{
-    font-size: 50px;
+    font-size: 45px;
     height: 60px;
     width: 100%;
     letter-spacing:2px
@@ -42,14 +42,14 @@
   </div>
   
   <div id="msg" style="padding-bottom: 20px;padding-top: 20px;font-size:40px;" ></div>
-  <div id="closewin" style="color:#999"></div>
+  <div id="closewin" style="color:#999; font-size: 20px;"></div>
 
 </body>
   
 <script language='javascript'>
     
     //定时关闭窗口
-    var ck = 3;
+    var ck = 5;
     function closewin()
     {
       WeixinJSBridge.call('closeWindow');
@@ -68,8 +68,6 @@
     function success(){
       document.getElementById("btnsignin").style.display="none";
       writelog("签到成功。。。");
-      //定时关闭窗口
-      clock();
     };
     
     function failure(msg){
@@ -85,13 +83,17 @@
             var data = eval('(' + text + ')');
             if (data.success == true){
               success();
+              //定时关闭窗口
+              clock();
             }
             else{
-              failure(data.msg);  
+              failure(data.msg);
+              clock();
             };
         }
         else{
-          failure('连接服务器发生异常错误。');    
+          failure('连接服务器发生异常错误。'); 
+          clock();
         }
       }
       else if(XMLHttpReq.readyState == 1){
