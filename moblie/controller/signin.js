@@ -5,35 +5,51 @@ var Db = require('../../lib/db');
 
 
 router.get('/',function(req,res,next){
+  
   var meet_guid = req.query.meet_guid;
   var openid = req.query.openid;
   
-  //有可能以前保存下来的电话，查users表。
-  Db.query('select user_phone from users where user_openid=? ',openid,function(err,rows){
-    var myphonecode ;
-    if(!err && rows){
-        myphonecode = rows[0].user_phone;
-    };
-    res.loadview('signin/index.html',{meet_guid:meet_guid,openid:openid,
-                                      user_phone:myphonecode,user_phone_old:myphonecode});  
-  });
-  
-  
+  Db.query('select meet_title,meet_status from meeting where meet_guid=? ',meet_guid,function(err,rows){
+    if(!err && rows.length>0){
+      
+      if(rows[0].meet_status==2){
+      
+        //有可能以前保存下来的电话，查users表。
+        Db.query('select user_phone from users where user_openid=? ',openid,function(err,rows){
+          var myphonecode ;
+          if(!err && rows){
+              myphonecode = rows[0].user_phone;
+          };
+          res.loadview('signin/index.html',{meet_guid:meet_guid,openid:openid,
+                                            user_phone:myphonecode,user_phone_old:myphonecode,err:false,errormsg:""});  
+        });
+      }
+      else{
+        res.loadview('signin/index.html',{meet_guid:meet_guid,openid:openid,
+                                      user_phone:'',user_phone_old:'',err:true,errormsg: rows[0].meet_title +'没有签到的状态，暂不能签到请稍候...'});     
+      }
+    }
+    else{
+      res.loadview('signin/index.html',{meet_guid:meet_guid,openid:openid,
+                                      user_phone:'',user_phone_old:'',err:true,errormsg:'没有找到的可签到的会议活动'});    
+    }
+  });  
 });
 
 router.post('/',function(req,res,next){
-  
   var openid = req.body.openid;
   var meet_guid = req.body.meet_guid;
   var user_phone = req.body.user_phone;
   var user_phone_old = req.body.user_phone_old; //原来老的，如不一样则要写入库了。
   
+       
   //写入库内并处理
   Db.query('update meeting_usr set meus_sginin=true,meus_openid=? where meet_guid=? and meus_phone=? and meus_sginin=false ',
            [openid,meet_guid,user_phone],function(err,rows){
     
     if(!err){
       if(rows.changedRows>0){
+      
         res.json({success:true,msg:"签到成功"});
         
         //发送信息

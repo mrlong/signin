@@ -32,16 +32,19 @@
   
 <body>
   
-  <div style="padding-bottom: 20px;padding-top: 20px;" >输入你的手机号码</div>
-  <div>
-  <input type="number" id="user_phone" value="<%=user_phone%>" />
-  </div>
+  <% if(!err){ %>
+    <div style="padding-bottom: 20px;padding-top: 20px;" >输入你的手机号码</div>
+    <div>
+    <input type="number" id="user_phone" value="<%=user_phone%>" />
+    </div>
+
+    <div>
+    <button id="btnsignin" class="abc" type="button">点击签到</button>
+    </div>
+
+  <%}%>
+  <div id="msg" style="padding-bottom: 20px;padding-top: 20px;font-size:30px;" ><%=errormsg%></div>
   
-  <div>
-  <button id="btnsignin" class="abc" type="button">点击签到</button>
-  </div>
-  
-  <div id="msg" style="padding-bottom: 20px;padding-top: 20px;font-size:30px;" ></div>
   <div id="closewin" style="color:#999; font-size: 20px;"></div>
 
 </body>
