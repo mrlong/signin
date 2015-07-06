@@ -23,56 +23,61 @@
     });
     
     
-    function readpic(){
+   var readpic = function (){
       $.get('/admin/info/pic/<%=row.meet_guid%>',function(data,status){
         if(status=='success' && data.success==true){
-          alert(data);
-          setTimeout("readpic();",2000);
-        };
-      });
-    };
-    readpic();
-    
-    
-    
-    
-     $('#chart').highcharts({
-        chart: {
+          
+          var charts = new Highcharts.Chart({
+          chart: {
+            renderTo:'chart',
             type: 'pie',
-            options3d: {
+              options3d: {
                 enabled: true,
                 alpha: 45,
                 beta: 0
-            }
-        },
-        title: {
-            text: '签到率图'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}人</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}'
+              }
+            },
+            title: {
+              text: '签到率图'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: 占总数的<b>{point.percentage:.1f}%</b>'
+            },
+            credits:{
+              enabled:false // 禁用版权信息
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 35,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
                 }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: '人数：',
-            data: [
-                ['签到',   45.0],
-                ['未签到', 26.8]
-            ]
-        }]
-    });
+            },
+            series: [{
+                type: 'pie',
+                name: '人数：',
+                data: [
+                    ['签到',  data.data[1].total],
+                    ['未签到',data.data[0].total]
+                ]
+            }]
+          });
+          
+          //setTimeout(readpic,2000);
+        };
+      });
+    };
+    
+    readpic();
+    
     
   });
+    
+    
   
 </script>
   

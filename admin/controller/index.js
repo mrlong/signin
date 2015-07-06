@@ -93,7 +93,7 @@ router.get('/info/:guid',function(req,res,next){
 
 router.get('/info/pic/:guid',function(req,res,next){
   var myguid = req.params.guid;
-  Db.query('select count(*) as total,meus_sginin from meeting_usr where meet_guid=? group by meus_sginin ',myguid,function(err,rows){
+  Db.query('select count(*) as total,meus_sginin from meeting_usr where meet_guid=? group by meus_sginin order by meus_sginin',myguid,function(err,rows){
     if(!err && rows.length>0){
       res.json({success:true,msg:'成功',data:rows}); 
     }
