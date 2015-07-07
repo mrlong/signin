@@ -3,7 +3,7 @@ body{
 }
 
 .page-header{
-    border-bottom: 2px solid #f82626; 
+    border-bottom: 1px solid #f82626; 
 }
 
 
@@ -30,3 +30,36 @@ body{
   bottom: 0%;
   font-size: 10px;
 }
+
+
+/*左边菜单*/
+nav {
+ background-color: #fff;
+ color: #333;
+ position: fixed;
+ width: 180px;
+ height: 100%;
+ top: 0;
+ left: 0;
+ padding: 30px;
+ font-size: 12px;
+ border-right: 2px solid red;
+ -moz-box-shadow: inset -10px 0 30px black;
+/* -webkit-box-shadow: inset -10px 0 30px black;*/
+/* box-shadow: inset -10px 0 30px black;*/
+}
+
+
+
+nav li {
+  font-size: 20px;
+  background:fffff
+}
+nav li.action a {
+  color: #ed2525;
+}
+nav li:hover{
+  background:#7c73be; 
+  filter : alpha(opacity=20);
+}
+

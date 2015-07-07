@@ -1,0 +1,28 @@
+<style>
+.container-fluid{
+  padding-left: 200px;
+}
+
+</style>
+
+<script>
+  function CNA(name){
+    $('li.action').removeClass('action');
+    var lis = $('nav li');
+    for (var i=0; i<lis.length;i++){
+      if($(lis[i]).text()==name){
+        $(lis[i]).addClass('action');
+        return;
+      };
+    };
+    
+  };
+
+</script>
+  
+<nav>
+  <ul class="list-unstyled">
+    <li><a href="/admin/">会议签到</a></li>
+    <li><a href="/admin/fans">微信粉丝</a></li>
+  </ul>
+</nav>
