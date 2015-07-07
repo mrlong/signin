@@ -127,6 +127,8 @@
         var meet_guid = "<%=meet_guid%>";
         var openid = "<%=openid%>";
         var user_phone_old = "<%=user_phone_old%>";
+        var meet_time = "<%=meet_time%>";
+        var meet_title = "<%=meet_title%>";
         
         writelog('检验发送中，请稍候...');
         btnsignin.disabled=true;
@@ -134,7 +136,8 @@
         XMLHttpReq.onreadystatechange = processResponse; //指定响应函数
         XMLHttpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=gbk");
         XMLHttpReq.send("user_phone="+user_phone + "&meet_guid=" + meet_guid + 
-                        "&openid=" + openid + "&user_phone_old=" + user_phone_old); 
+                        "&openid=" + openid + "&user_phone_old=" + user_phone_old + 
+                        "&meet_title=" + meet_title + "&meet_time=" + meet_time); 
         
       };
     };

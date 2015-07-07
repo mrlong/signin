@@ -177,6 +177,30 @@ exports.qrcodeurl=function(id,fn){
       if(fn) fn(err); 
     }
   }); 
-}
+};
+
+//
+//签到成功之后，发送信息
+//格式：
+//{{first.DATA}}
+//会议名称：{{keyword1.DATA}}
+//签到时间：{{keyword2.DATA}}
+//{{remark.DATA}}
+//
+exports.msgSignin=function(openid,data,cb){
+  
+  var templateid = 'yYk76GlBCvueuHHdBZJAqEyWFB3DrBVHpdN6vRxtlBI';
+  var topcolor = '#FF0000'; // 顶部颜色
+  //var url = config.domain +  data.url + '?openid=' + openid;
+  var url = null;
+  Api.sendTemplate(openid,templateid,url,topcolor,data,function(err,result){
+    if(err){
+      if(cb) cb(err);
+      //不成功是否要定入库内，由定时器再来发送
+      return;
+    };
+    if(cb) cb(null);
+  });
+};
 
 
