@@ -10,6 +10,12 @@
 
   }
   
+  tr img {
+    width: 30px;
+    height: 30px;
+
+  }
+  
   
   
 </style>
@@ -41,11 +47,12 @@
     <tr>
       <td><%=rowno++%></td>
       <td>
-        <img src="/admin/user/headimg/<%=row.meus_openid?row.meus_openid:'11'%>" class="img-circle"> 
+        <img src="/admin/user/headimg/<%=row.meus_openid?row.user_openid:'11'%>" class="img-circle"> 
         <%=row.user_nickname%>
       </td> 
       
       <td><%=row.user_sex==1?'男':'女'%></td>
+      <td><%=row.user_phone%></td>    
       <td><%=row.user_province%></td>  
       <td><%=row.user_city%></td> 
 
