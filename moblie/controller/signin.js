@@ -32,7 +32,7 @@ router.get('/',function(req,res,next){
       else{
         res.loadview('signin/index.html',{meet_guid:meet_guid,openid:openid,
                                           user_phone:'',user_phone_old:'',
-                                          err:true,errormsg: rows[0].meet_title +'没有签到的状态，暂不能签到请稍候...',
+                                          err:true,errormsg: rows[0].meet_title +'会议没有签到的状态，暂不能签到请稍候...',
                                           meet_time:'',
                                           meet_title:''});     
       }
@@ -85,7 +85,7 @@ router.post('/',function(req,res,next){
         //end 
       }
       else{
-        res.json({success:false,msg:'签到失败，怀疑无签到数据或已经签到。'});   
+        res.json({success:false,msg:'签到失败，请联系会务组。'});   
       }
     }
     else{
