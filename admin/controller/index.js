@@ -119,6 +119,53 @@ router.get('/users/:guid',function(req,res,next){
 });
 
 
+//修改会议的名单
+router.post('/users/update/:guid',function(req,res,next){
+  var meet_guid = req.params.guid;
+  var phone = req.body.youphone;
+  var name = req.body.youname;
+  var unit = req.body.youunit;
+  var msg = req.body.msg;
+  
+
+  Db.query('update meeting_usr set meus_name=?,meus_unit=?,meus_msg=? where meet_guid=? and meus_phone=?',
+           [name,unit,msg,meet_guid,phone],function(err,rows){
+    
+    if(!err && rows.changedRows>0){
+      res.json({success:true,msg:'修改成功'})
+    }
+    else{
+      res.json({success:false,msg:'保存数据失败'}); 
+    }
+  });  
+});
+
+//增加会议新名单
+router.post('/users/add/:guid',function(req,res,next){
+  var meet_guid = req.params.guid;
+  var phone = req.body.youphone;
+  var name = req.body.youname;
+  var unit = req.body.youunit;
+  var msg = req.body.msg;
+  
+  var newData = {
+    meet_guid:meet_guid,
+    meus_phone: phone,
+    meus_unit:unit,
+    meus_msg:msg,
+    meus_name:name
+  };
+  
+  Db.query('insert into meeting_usr set ?', newData,function(err,rows){
+    if(!err && rows.affectedRows>0){
+      res.json({success:true,msg:'新增成功'});   
+    }
+    else{
+      res.json({success:false,msg:'新增出错'}); 
+    }
+  });
+  
+});
 
 
 router.get('/',function(req,res,next){

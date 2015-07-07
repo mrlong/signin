@@ -24,13 +24,53 @@
 <script>
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
-   
+    
+    $('#myModal-update').on('show.bs.modal', function (event) {
+      var a = $(event.relatedTarget);
+      var phone = a.data('phone');
+      var modal = $(this);
+      $("#myModalLabel").text(a.text());
+      modal.find('#youname').val($("#name-" + phone).text());
+      modal.find('#youunit').val($("#unit-" + phone).text());
+      modal.find('#youphone').val(phone);
+      modal.find('#msg').val($("#msg-" + phone).text());
+    });
+    
+    $('#updatebysave').on('click',function(){
+      var modal = $('#myModal-update');
+      if ($("#myModalLabel").text()=='增加人员') {
+        $.post('/admin/users/add/<%=meeting.meet_guid%>',$("form").serialize(),function(data,status){
+          if(status=='success' && data.success==true){
+            alert('增加成功，请刷新页面');
+          }
+          else{
+            alert('提交到服务器出错');  
+          }
+        })
+      }
+      else{
+        $.post('/admin/users/update/<%=meeting.meet_guid%>',$("form").serialize(),function(data,status){
+          if(status=='success' && data.success==true){
+            var phone = $("#youphone").val();
+            $("#name-" + phone).text($("#youname").val());
+            $("#unit-" + phone).text($("#youunit").val());
+            $("#msg-" + phone).text($("#msg").val());
+          }
+          else{
+            alert('提交到服务器出错'); 
+          }
+        });
+      };
+      modal.modal('hide');
+      
+    });
+    
   });
   
 </script>
   
 <div class="page-header">
-  <h1>会议名单<small>-<%=meeting.meet_title%></small></h1>
+  <h1>会议名单<small>-<%=meeting.meet_title%></small> <small><a href="#" data-toggle="modal" data-target="#myModal-update">增加人员</a></small> </h1>
 </div>
 
 <div class="container-full">
@@ -44,6 +84,7 @@
       <th> 单位</td>
       <th> 状态</td>
       <th> 签到回复内容</td>
+      <th> 操作</th>
     </tr>
   <% var rowno=1; rows.forEach(function(row){ %> 
     <tr>
@@ -51,22 +92,23 @@
       
         <% if(row.meus_sginin == true) {%>
           <td>
-          <img src="/admin/user/headimg/<%=row.meus_openid?row.meus_openid:'11'%>" class="img-circle"> 
-          <%=row.meus_name%>
-           </td> 
+            <img src="/admin/user/headimg/<%=row.meus_openid?row.meus_openid:'11'%>" class="img-circle"> 
+            <small id="name-<%=row.meus_phone%>"><%=row.meus_name%></small>
+          </td> 
         <%} else {%>
           <td style="padding-left: 40px;"> 
-          <%=row.meus_name%>
+          <small id="name-<%=row.meus_phone%>"><%=row.meus_name%></small>
           </td> 
         <%}%>
         
      
       <td><%=row.meus_phone%></td>
-      <td><%=row.meus_unit%></td>
+      <td id="unit-<%=row.meus_phone%>" ><%=row.meus_unit%></td>
       <td>
         <% if(row.meus_sginin==true){%> <span class="label label-success">签到</span> <%}%>  
       </td> 
-      <td><%=row.meus_msg%></td>
+      <td id="msg-<%=row.meus_phone%>"><%=row.meus_msg%></td>
+      <td><a href="#"  data-phone="<%=row.meus_phone%>" data-toggle="modal" data-target="#myModal-update">修改</a></td>
     </tr>  
   <% }) %>
     
@@ -77,5 +119,49 @@
 </div>
 
 
+<div class="modal fade" id="myModal-update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="youname" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="youname" name="youname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="youphone" class="col-sm-2 control-label">电话</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="youphone" name="youphone" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="youunit" class="col-sm-2 control-label">单位</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="youunit" name="youunit">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="msg" class="col-sm-2 control-label">回复内容</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="msg" name="msg"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="updatebysave" class="btn btn-danger">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            
   
 <% include ../footer.html %>
