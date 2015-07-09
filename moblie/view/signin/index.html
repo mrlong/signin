@@ -2,6 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
   </head>
 
 <style>
@@ -16,7 +17,14 @@
     font-size: 45px;
     height: 60px;
     width: 100%;
-    letter-spacing:2px
+    letter-spacing:2px;
+    
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
   }
   
   button{
@@ -27,6 +35,17 @@
     font-size: 45px;
     background-color: #e86716;
   }
+  
+  @media only screen and (max-width:640px){
+    input{
+      font-size: 30px;
+    }
+    
+    button{
+      font-size: 30px;  
+    }
+  }
+  
 </style>
 
   
