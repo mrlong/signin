@@ -169,7 +169,7 @@ exports.SCAN=function(event,fn){
 // 返回值:
 //  err, url
 exports.qrcodeurl=function(id,fn){
-  Api.createLimitQRCode(1,function(err,data){
+  Api.createLimitQRCode(id,function(err,data){
     if(!err && data.ticket){
       if(fn) fn(null,Api.showQRCodeURL(data.ticket));
     }
