@@ -3,11 +3,15 @@ body{
 }
 
 .page-header{
-    border-bottom: 1px solid #f82626; 
+    border-bottom: 2px solid   #f82626; 
 }
 
 .page-header small{
   font-size: 20px; 
+}
+
+.page-header h1{
+  font-size: 34px;
 }
 
 .form-control:focus {
@@ -37,32 +41,47 @@ body{
 
 /*左边菜单*/
 nav {
- background-color: #fff;
+ background-color: #fafafa;
  color: #333;
- position: fixed;
+ position:absolute;
  width: 180px;
  height: 100%;
  top: 0;
  left: 0;
- padding: 30px;
+ padding: 0px;
  font-size: 12px;
- border-right: 2px solid red;
+ border-right: 2px solid #f82626;
  -moz-box-shadow: inset -10px 0 30px black;
 /* -webkit-box-shadow: inset -10px 0 30px black;*/
 /* box-shadow: inset -10px 0 30px black;*/
 }
 
-
+nav img{
+  padding: 10px;
+  height: 110px;
+  width: 175px;
+}
 
 nav li {
-  font-size: 20px;
-  background:fffff
+  
 }
-nav li.action a {
-  color: #ed2525;
+
+nav li a {
+  font-size: 15px;
+  margin-left: 20px;
 }
+
+nav li.action{
+  background-color: #fff;
+  border-bottom: 1px solid #f82626;
+}
+
+nav li a:hover{
+  color: #ed2525; 
+}
+
 nav li:hover{
-  background:#7c73be; 
+  color: #ed2525;
   filter : alpha(opacity=20);
 }
 
