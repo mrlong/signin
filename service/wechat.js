@@ -135,32 +135,40 @@ exports.SCAN=function(event,fn){
     });
   }
   var content;
-  Db.query('select * from meeting where meet_status !=0 and meet_sceneid=? order by meet_time desc ',key,function(err,rows){
-    if(!err && rows.length>0){
-      content = eval('([' + rows[0].meet_content + '])');
-      if(content && content instanceof Array){
-        //在所路径后面增加当前会议的guid
-        for(var i=0;i<content.length;i++){
-          if(content[i].url){ 
-            content[i].url = content[i].url + (content[i].url.indexOf("?")<0?"?":"&") + "meet_guid=" + rows[0].meet_guid; 
-            content[i].url = content[i].url + "&openid=" + event.FromUserName; //带上openid 为了后面取值之用。
-          }
-        };
-        if(fn) fn(null,content);  
+  //登录时
+  if(key==100001){
+    content = '登录成功';
+    if(fn) fn(null,content);
+  }
+  else{
+    Db.query('select * from meeting where meet_status !=0 and meet_sceneid=? order by meet_time desc ',key,function(err,rows){
+      if(!err && rows.length>0){
+        content = eval('([' + rows[0].meet_content + '])');
+        if(content && content instanceof Array){
+          //在所路径后面增加当前会议的guid
+          for(var i=0;i<content.length;i++){
+            if(content[i].url){ 
+              content[i].url = content[i].url + (content[i].url.indexOf("?")<0?"?":"&") + "meet_guid=" + rows[0].meet_guid; 
+              content[i].url = content[i].url + "&openid=" + event.FromUserName; //带上openid 为了后面取值之用。
+            }
+          };
+          if(fn) fn(null,content);  
+        }
+        else{
+          if(fn) fn(new Error('编辑回复内容的格式出错'));     
+        }
       }
       else{
-        if(fn) fn(new Error('编辑回复内容的格式出错'));     
+        if(err){
+          if(fn) fn(err);
+        }
+        else{
+          if(fn) fn(new Error('没有参与的活动'));  
+        }
       }
-    }
-    else{
-      if(err){
-        if(fn) fn(err);
-      }
-      else{
-        if(fn) fn(new Error('没有参与的活动'));  
-      }
-    }
-  });
+    });
+  }
+  
 };
 
 //
@@ -192,7 +200,7 @@ exports.createTmpQRCode = function (sceneId, expire, fn) {
     fn = expire;
     expire = 1800;
   };
-  Api.createTmpQRCode(id,expire,fn);
+  Api.createTmpQRCode(sceneId,expire,fn);
 };
 
 //

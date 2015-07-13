@@ -27,6 +27,7 @@ create table if not exists meeting_usr (
   meus_sginin tinyint(1) default false comment '==ture 签到了',
   meus_msg varchar(250) comment '学员签到通知',
   meus_openid varchar(50) comment '微信的openid',
+  meus_sortid int default 0 comment '排序号',
   
   primary key(meet_guid,meus_phone)
 ) engine=innodb  default charset=utf8 comment='会议学员';
