@@ -180,6 +180,32 @@ exports.qrcodeurl=function(id,fn){
 };
 
 //
+// 取出临时的二维码
+//参数：
+//
+// * @param {Number} sceneId 场景ID
+// * @param {Number} expire 过期时间，单位秒。最大不超过1800
+// * @param {Function} callback 回调函数
+// */
+exports.createTmpQRCode = function (sceneId, expire, fn) {
+  if (typeof expire == 'function'){
+    fn = expire;
+    expire = 1800;
+  };
+  Api.createTmpQRCode(id,expire,fn);
+};
+
+//
+// 显示二维码的图片路径
+// 参数： 
+//  ticket， 在申请二维码时就有这个值了。
+//
+
+exports.showQRCodeURL= function (ticket) {
+  return Api.showQRCodeURL(ticket);
+};
+
+//
 //签到成功之后，发送信息
 //格式：
 //{{first.DATA}}
