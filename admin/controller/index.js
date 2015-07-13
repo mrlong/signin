@@ -172,7 +172,7 @@ router.post('/users/add/:guid',function(req,res,next){
 router.get('/users/export/:guid',function(req,res,next){
   var meet_guid = req.params.guid;
   
-  Db.query('select * from meeting_usr where meet_guid',meet_guid,function(err,rows){
+  Db.query('select * from meeting_usr where meet_guid=?',meet_guid,function(err,rows){
     if(!err && rows.length>0){
       //开始写入文件到
       var data = [];
