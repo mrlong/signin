@@ -65,12 +65,14 @@
       
     });
     
+
+    
   });
   
 </script>
   
 <div class="page-header">
-  <h1>会议名单<small>-<%=meeting.meet_title%></small> <small><a href="#" data-toggle="modal" data-target="#myModal-update">增加人员</a></small> </h1>
+  <h1>会议名单<small>-<%=meeting.meet_title%></small> <small><a href="#" data-toggle="modal" data-target="#myModal-update">增加人员</a> <a href="/admin/users/export/<%=meeting.meet_guid%>" id="exportdata">导出名单</a></small> </h1>
 </div>
 
 <div class="container-full">

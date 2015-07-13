@@ -1,5 +1,6 @@
 <% include ../header.html %>
 <script src="/js/highcharts.js"></script>
+<script src="/js/highcharts-3d.js"></script>
 <style>
   .error{
     color: red; 
@@ -61,8 +62,8 @@
                 type: 'pie',
                 name: '人数：',
                 data: [
-                    ['签到',  data.data[1].total],
-                    ['未签到',data.data[0].total]
+                    ['签到 ' +  data.data[1].total + '(人)',  data.data[1].total],
+                    ['未签到' + data.data[0].total + '(人)',data.data[0].total]
                 ]
             }]
           });

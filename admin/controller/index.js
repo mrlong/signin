@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Db = require('../../lib/db');
 var wechatservice = require('../../service/wechat');
+var fs = require('fs');
 
 
 router.get('/edit/:guid',function(req,res,next){
@@ -166,6 +167,39 @@ router.post('/users/add/:guid',function(req,res,next){
   });
   
 });
+
+//导出名称信息
+router.get('/users/export/:guid',function(req,res,next){
+  var meet_guid = req.params.guid;
+  
+  Db.query('select * from meeting_usr where meet_guid',meet_guid,function(err,rows){
+    if(!err && rows.length>0){
+      //开始写入文件到
+      var data = [];
+      for (var i=0;i<rows.length;i++){
+        
+        var str = rows[i].meus_name  + ',' + 
+                  rows[i].meus_phone + ',' +
+                  rows[i].meus_unit  + ',' +
+                  (rows[i].meus_sginin==true?'签到,':'未签到,') +
+                  rows[i].meus_msg.trim().replace(/\r\n/g,';') + ',' + 
+                  (rows[i].meus_openid?rows[i].meus_openid:'');
+        str.replace(/\r\n/g,';');  //去回车
+        data.push(str);
+      };
+      
+      //console.log(data);
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+      res.setHeader("Content-Disposition", "attachment; filename=" + "export.csv");
+      res.end(new Buffer(data.join('\n')), 'binary');
+    }
+    else{
+      res.msgbox(err?'读取数据出错':'无可导出的数据');  
+    }
+  });
+});
+
+
 
 
 router.get('/',function(req,res,next){
