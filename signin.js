@@ -60,6 +60,7 @@ app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 app.set('view cache', false);
 
+/*
 app.use(cookieParser());
 app.use(session({
   name:'signinapp',
@@ -67,6 +68,17 @@ app.use(session({
   key: 'signinapp', 
   cookie: { secure: false,maxAge: 1000 * 60 * 60 * 24 * 1 }  //1天保存
 }));
+*/
+
+app.use(cookieParser());
+app.use(session({
+  secret: '7895123', 
+  resave: false,
+  saveUninitialized: true,
+  //cookie: { secure: false,maxAge: 1000 * 60 * 60 * 24} //1 hour保存 
+}));
+
+
 
 app.use(multer({
   dest: './upload',
