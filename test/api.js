@@ -23,3 +23,6 @@ Api.createLimitQRCode(1,function(err,data){
     console.log(Api.showQRCodeURL(data.ticket));
 });
 
+
+
+

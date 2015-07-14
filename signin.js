@@ -105,6 +105,25 @@ app.use('/',function(req,res,next){
   res.redirect('/admin');
 });
 
+//导常处理方案
+///app.error(function(err, req, res, next){                                             
+//  mailServie.sendMail({                                                     
+//    subject : "FixedAssetManager_Server[App Error]",                    
+//    text    : err.message + "\n" + err.stack + "\n" + err.toString()            
+//  });                                                                       
+//  if (err instanceof PageNotFoundError) {                               
+//      res.render("errors/404");                                             
+//  } else if (err instanceof ServerError) {                                      
+//      res.render("errors/500");                                             
+//  }                                                                         
+//}); 
+
+process.on("uncaughtException", function (err) {                                      
+//  mailServie.sendMail({                                                     
+//      subject : "FixedAssetManager_Server[App Error]",                      
+//      text    : err.message + "\n" + err.stack + "\n" + err.toString()          
+//  });                                                                       
+});   
 
 
 app.listen(3001);

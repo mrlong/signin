@@ -19,6 +19,22 @@ router.get('/',function(req,res,next){
   });
 });
 
+// http://xxxxx/admin/login/wx
+router.get('/wx',function(req,res,next){
+  var sid = req.query.sid;
+  var openid  = req.query.openid;
+  Db.query('select * from manager where mana_openid=?',openid,function(err,rows){
+    if(!err && rows.length>0){
+      req.session.openid=openid;
+      res.end('登录成功');
+    }
+    else{
+      res.end('登录失败');
+    };
+  });
+
+});
+
 
 
 

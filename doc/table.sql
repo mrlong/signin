@@ -56,9 +56,20 @@ create table if not exists users (
 /*管理员*/
 create table if not exists manager(
   mana_openid varchar(50) not null comment 'openid',
-  mana_remark varchar(200) comment '备注'
+  mana_remark varchar(200) comment '备注',
   primary key(mana_openid)
 )engine=innodb  default charset=utf8 comment='管理员';
+
+
+/*登录状态*/
+create table if not exists loginstatus(
+  logo_num int not null comment '登录的固定码 从100001开始',
+  logo_openid varchar(50) comment 'openid',
+  logo_expire timestamp comment '过期时间',
+  logo_do tinyint(1) default false comment '=true 表示已签到过'
+
+  primary key(logo_num)
+)engine=innodb  default charset=utf8 comment='登录状态';
 
 
 

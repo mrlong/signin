@@ -245,3 +245,8 @@ exports.msgSignin=function(openid,data,cb){
 };
 
 
+
+
+
+
+
