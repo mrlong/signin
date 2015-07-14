@@ -35,7 +35,11 @@ module.exports = function(event, req, res, next){
                 res.reply(content); 
               }
               else{
-                res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+                if(event.key == 100001){
+                  res.reply( err + '(二维码号:' + event.EventKey + ')'  + 'openid=' + event.FromUserName);
+                }
+                else
+                  res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
               }
             });
           }
