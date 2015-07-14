@@ -8,7 +8,7 @@ router.use(function(req,res,next){
   console.log(req);
   console.log('session=' + req.session.openid);
   
-  if(req.session.openid || req.originalUrl=='/admin/login'){
+  if(req.session.openid || (req.sessionStore.sessions && req.sessionStore.sessions.openid) || req.originalUrl=='/admin/login'){
     next(); 
   }
   else{
