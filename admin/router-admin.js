@@ -5,6 +5,7 @@ var router = express.Router();
 //网站的主页。
 router.use(function(req,res,next){
   res.viewstyle = 'admin'; 
+  console.log('session=' + req.session.openid);
   
   if(req.session.openid || req.originalUrl=='/admin/login'){
     next(); 
