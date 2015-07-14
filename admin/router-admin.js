@@ -5,8 +5,7 @@ var router = express.Router();
 //网站的主页。
 router.use(function(req,res,next){
   res.viewstyle = 'admin'; 
-  console.log(req);
-  console.log('session=' + req.session.openid);
+
   
   if(req.session.openid || (req.sessionStore.sessions && req.sessionStore.sessions.openid) || req.originalUrl=='/admin/login'){
     next(); 
@@ -14,6 +13,8 @@ router.use(function(req,res,next){
   else{
      //next(); 
     //req.session.openid='6666';
+    console.log(req.sessionStore);
+    console.log('session=' + req.session.openid);
     res.redirect('/admin/login'); 
   }
 });
