@@ -16,7 +16,9 @@ router.use(function(req,res,next){
     //req.session.openid='6666';
     console.log(req.sessionStore);
     console.log(req.sessionStore.sessions[req.sessionID]);
-    console.log(req.sessionStore.sessions[req.sessionID].indexOf('openid')>=0);
+    if(req.sessionStore.sessions[req.sessionID]){
+      console.log(req.sessionStore.sessions[req.sessionID].indexOf('openid')>=0);
+    }
     console.log('session=' + req.session.openid);
     res.redirect('/admin/login'); 
   }
