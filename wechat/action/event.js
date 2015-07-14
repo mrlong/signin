@@ -131,8 +131,8 @@ module.exports = function(event, req, res, next){
           req.wxsession.openid=event.FromUserName;
           req.wxsession.req.openid = event.FromUserName;
           console.log('=============='+ req.wxsession.req);
-          console.log('######'+ req.wxsession.req.SessionID);
-          console.log(req.session.SessionID+'--login');
+          console.log('######'+ req.wxsession.req.sessionID);
+          console.log(req.sessionID+'--login');
         };
         res.reply(content); 
       }
