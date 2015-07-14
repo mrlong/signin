@@ -127,8 +127,8 @@ module.exports = function(event, req, res, next){
       if(!err){
         //这个是登录，则要处理session
         if(event.EventKey == 100001){
-          //req.session.openid=event.FromUserName;
-          //req.session.openid='sssss';
+          req.session.openid=event.FromUserName;
+          req.wxsession.openid=event.FromUserName;
           console.log(req.sessions.openid+'--login');
         };
         res.reply(content); 

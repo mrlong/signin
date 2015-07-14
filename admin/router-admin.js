@@ -5,14 +5,15 @@ var router = express.Router();
 //网站的主页。
 router.use(function(req,res,next){
   res.viewstyle = 'admin'; 
+  console.log(req);
   console.log('session=' + req.session.openid);
   
-  if(req.sessions.openid || req.originalUrl=='/admin/login'){
+  if(req.session.openid || req.originalUrl=='/admin/login'){
     next(); 
   }
   else{
      //next(); 
-    req.sessions.openid='6666';
+    req.session.openid='6666';
     res.redirect('/admin/login'); 
   }
 });
