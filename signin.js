@@ -82,6 +82,7 @@ app.use('/m',require('./moblie/router-moblie'));
 
 //微信
 app.use('/wechat',wechat(config.wechat.token,function (req, res, next){
+  console.log(req.session.openid+'--login22');
   next(); 
 }),require('./wechat'));
 require('./wechat/menu').createmenu();
