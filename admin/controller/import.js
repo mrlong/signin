@@ -34,6 +34,7 @@ router.post('/push/:guid',function(req,res,next){
             var rowcount = 0;
             var rowyes = 0; //有效数据行
             var rownot = 0; //无效数据行
+            var no = 0;
             data.split('\n').forEach(function(row){
               //console.log(row);
               ++rowcount;
@@ -46,14 +47,15 @@ router.post('/push/:guid',function(req,res,next){
                     meus_name:values[0],
                     meus_phone:values[1],
                     meus_unit:values[2],
-                    meus_msg:values[3]
+                    meus_msg:values[3],
+                    meus_sortid:no++
                   };
                   Db.query('insert into meeting_usr set ?',rowdata,function(err){
                     if(err){
                       rowyes++;
                     }
                     else{
-                      console.log(err); 
+                      //console.log(err); 
                     }
                   });
                 }

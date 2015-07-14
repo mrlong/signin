@@ -10,6 +10,7 @@ router.use(function(req,res,next){
     next(); 
   }
   else{
+     //next(); 
     res.redirect('/admin/login'); 
   }
 });

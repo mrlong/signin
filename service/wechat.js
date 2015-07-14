@@ -137,8 +137,15 @@ exports.SCAN=function(event,fn){
   var content;
   //登录时
   if(key==100001){
-    content = '登录成功';
-    if(fn) fn(null,content);
+    Db.query('select * from manager where mana_openid=?',event.FromUserName,function(err,rows){
+      if(!err && rows.length>0){
+        if(fn) fn(null,'登录成功');
+      }
+      else{
+        content = '登录失败';
+        if(fn) fn(new Error('登录失败'),content);
+      }
+    });
   }
   else{
     Db.query('select * from meeting where meet_status !=0 and meet_sceneid=? order by meet_time desc ',key,function(err,rows){

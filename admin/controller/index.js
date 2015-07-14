@@ -106,15 +106,15 @@ router.get('/info/pic/:guid',function(req,res,next){
 
 router.get('/users/:guid',function(req,res,next){
   var myguid = req.params.guid;
-  Db.query('select * from meeting where meet_guid=?',myguid,function(err,meeting){
+  Db.query('select * from meeting where meet_guid=?  ',myguid,function(err,meeting){
     
     if(!err && meeting.length>0){
-      Db.query('select * from meeting_usr where meet_guid=? order by meus_name ',myguid,function(err,rows){
+      Db.query('select * from meeting_usr where meet_guid=? order by meus_sortid',myguid,function(err,rows){
         res.loadview('index/users.html',{meeting:meeting[0],rows:rows});
       });  
     }
     else{
-      res.msgbox('无效的会议活动。') 
+      res.msgBox('无效的会议活动。') 
     }
   });
 });
@@ -172,7 +172,7 @@ router.post('/users/add/:guid',function(req,res,next){
 router.get('/users/export/:guid',function(req,res,next){
   var meet_guid = req.params.guid;
   
-  Db.query('select * from meeting_usr where meet_guid=?',meet_guid,function(err,rows){
+  Db.query('select * from meeting_usr where meet_guid=?  order by meus_sortid',meet_guid,function(err,rows){
     if(!err && rows.length>0){
       //开始写入文件到
       var data = [];

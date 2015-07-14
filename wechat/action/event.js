@@ -125,10 +125,18 @@ module.exports = function(event, req, res, next){
   else if(event.Event =='SCAN'){
     User.SCAN(event,function(err,content){
       if(!err){
+        //这个是登录，则要处理session
+        if(event.key == 100001){
+          req.session.openid=event.FromUserName;
+        };
         res.reply(content); 
       }
       else{
-        res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+        if(event.key == 100001){
+          res.reply( err + '(二维码号:' + event.EventKey + ')'  + 'openid=' + event.FromUserName);
+        }
+        else
+          res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
       }
     });
   }

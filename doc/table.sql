@@ -53,6 +53,13 @@ create table if not exists users (
   primary key(user_openid)
 ) engine=innodb  default charset=utf8 comment='粉丝';
 
+/*管理员*/
+create table if not exists manager(
+  mana_openid varchar(50) not null comment 'openid',
+  mana_remark varchar(200) comment '备注'
+  primary key(mana_openid)
+)engine=innodb  default charset=utf8 comment='管理员';
+
 
 
 
