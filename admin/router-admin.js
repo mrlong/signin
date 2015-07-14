@@ -7,12 +7,12 @@ router.use(function(req,res,next){
   res.viewstyle = 'admin'; 
   console.log('session=' + req.session.openid);
   
-  if(req.session.openid || req.originalUrl=='/admin/login'){
+  if(req.sessions.openid || req.originalUrl=='/admin/login'){
     next(); 
   }
   else{
      //next(); 
-    req.session.openid='6666';
+    req.sessions.openid='6666';
     res.redirect('/admin/login'); 
   }
 });

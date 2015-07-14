@@ -129,7 +129,7 @@ module.exports = function(event, req, res, next){
         if(event.EventKey == 100001){
           //req.session.openid=event.FromUserName;
           //req.session.openid='sssss';
-          console.log(req.session.openid+'--login');
+          console.log(req.sessions.openid+'--login');
         };
         res.reply(content); 
       }
