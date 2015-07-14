@@ -13,6 +13,7 @@
     "express-session":"*",
     "cookie-parser":"*",
     "urllib":"*",
-    "multer":"*"
+    "multer":"*",
+    "qrcode":"*"
   }
 }
