@@ -12,6 +12,7 @@ router.use(function(req,res,next){
   }
   else{
      //next(); 
+    req.session.openid='6666';
     res.redirect('/admin/login'); 
   }
 });
