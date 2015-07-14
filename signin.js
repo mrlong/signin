@@ -81,7 +81,9 @@ app.use('/admin',require('./admin/router-admin'));
 app.use('/m',require('./moblie/router-moblie'));
 
 //微信
-app.use('/wechat',require('./wechat'));
+app.use('/wechat',wechat(config.wechat.token,function (req, res, next){
+  next(); 
+}),require('./wechat'));
 require('./wechat/menu').createmenu();
 
 app.use('/',function(req,res,next){
