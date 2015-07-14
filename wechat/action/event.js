@@ -140,7 +140,7 @@ module.exports = function(event, req, res, next){
           res.reply( err + '(二维码号:' + event.EventKey + ')'  + 'openid=' + event.FromUserName);
         }
         else
-          res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+          res.reply('无活动可参与1。(二维码号:' + event.EventKey + ')' + err); 
       }
     });
   }
