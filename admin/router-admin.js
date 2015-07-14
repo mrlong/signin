@@ -17,7 +17,7 @@ router.use(function(req,res,next){
     console.log(req.sessionStore);
     console.log(req.sessionStore.sessions[req.sessionID]);
     if(req.sessionStore.sessions[req.sessionID]){
-      console.log(req.sessionStore.sessions[req.sessionID].indexOf('openid')>=0);
+      console.log(req.sessionStore.sessions[req.sessionID].openid);
     }
     console.log('session=' + req.session.openid);
     res.redirect('/admin/login'); 
@@ -32,3 +32,6 @@ router.use('/',require('./controller/index'));
 
 
 module.exports=router;
+
+
+
