@@ -19,7 +19,7 @@ var menu = {
         {
           "type":"view",
           "name":"了解擎洲",
-          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208152530&idx=1&sn=e3f39519c66285b8f9082a4ab21946c3"
+          "url":"http://mp.weixin.qq.com/s?__biz=MjM5MTAwNzQ2Mw==&mid=208897143&idx=1&sn=e15f6214899b93cceabfdbbeffee9a1a#rd"
         },
         {
           "type":"click",
