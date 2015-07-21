@@ -62,7 +62,7 @@ router.get('/',function(req,res,next){
 // http://xxxxx/admin/login/wx
 router.post('/time/:sid',function(req,res,next){
   var sid = req.params.sid;
-  Db.query('select qrco_openid from qrcode where qrco_num=? and qrco_type=0 and qrco_use=true and now()< qrco_expire',
+  Db.query('select qrco_openid from qrcode where qrco_num=? and qrco_type=0 and qrco_use=true ',
            [sid],function(err,rows){
     if(!err && rows.length>0){
       //查这个openid 是不是管理者
