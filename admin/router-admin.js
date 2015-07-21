@@ -6,7 +6,7 @@ var router = express.Router();
 router.use(function(req,res,next){
   res.viewstyle = 'admin'; 
 
-  if(req.session.openid || req.originalUrl=='/admin/login'){
+  if(req.session.openid || req.originalUrl.indexOf('/admin/login')>=0){
     next();
   }
   else{

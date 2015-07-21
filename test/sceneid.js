@@ -10,5 +10,5 @@ console.log(o.newTmpSceneId(1));
 console.log(o);
 
 var d = new Date();
-d.setSeconds(d.getSeconds()+1800);
+d.setMinutes(d.getMinutes()+10);
 console.log(d)

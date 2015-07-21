@@ -21,13 +21,35 @@ img{
 </style>
   
 <script>
-
+    
+  var ck = <%=expire%>;
+  function dotime()
+  {
+    ck=ck-1;
+    $.post('/admin/login/time/<%=sid%>',function(data,status){
+      if(status=='success'){
+        if(data.success==true){
+          location.href='/admin';
+        }
+        else{
+          if(data.waiting==false){
+            $('#txt').text(data.msg);
+            $('#txt').css('color','red');
+          };
+        }
+      };
+    });
+    $('#txt').text('微信扫一扫(' + ck + ')');    
+    if(ck > 0) setTimeout("dotime();",1000);
+  };
+  
   $(document).ready(function(){
     var l = parseInt((document.body.clientWidth-200)/2);
     var r = parseInt((document.documentElement.clientHeight-200)/2);
     $('img').css('left',l);
     $('img').css('top',r);
     $('#txt').css('padding-top',r+200);
+    dotime();
   });
   
 </script>
