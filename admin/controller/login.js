@@ -71,6 +71,8 @@ router.post('/time/:sid',function(req,res,next){
       if(!err && rows.length>0){
         req.session.openid=openid; 
         res.json({success:true,msg:'登录成功',waiting:false});
+        //删除历史数据
+        Db.query('delete  from qrcode where qrco_num=? and qrco_type=0 and qrco_use=true');
       }
       else{
         res.json({success:false,msg:'无权限',waiting:false});    
