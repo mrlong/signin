@@ -68,15 +68,17 @@ router.post('/time/:sid',function(req,res,next){
       //查这个openid 是不是管理者
       var openid = rows[0].qrco_openid;
       Db.query('select * from manager where mana_openid=?',openid,function(err,rows){
-      if(!err && rows.length>0){
-        req.session.openid=openid; 
-        res.json({success:true,msg:'登录成功',waiting:false});
+        if(!err && rows.length>0){
+          req.session.openid=openid; 
+          res.json({success:true,msg:'登录成功',waiting:false});
+        }
+        else{
+          res.json({success:false,msg:'无权限',waiting:false});    
+        };
         //删除历史数据
         Db.query('delete  from qrcode where qrco_num=? and qrco_type=0 and qrco_use=true');
-      }
-      else{
-        res.json({success:false,msg:'无权限',waiting:false});    
-      }})
+      
+      })
     }
     else{
       res.json({success:false,msg:'',waiting:true});  
