@@ -141,7 +141,7 @@ exports.SCAN=function(event,fn){
   if(key>100000){
     //查找二维码的临时库有没有
     Db.query('update qrcode set qrco_use=true,qrco_openid=? where qrco_num=? and now()< qrco_expire',
-             [event.FromUserName key],function(err,data){
+             [event.FromUserName,key],function(err,data){
       if(!err && data.changedRows>0){ 
         if(fn) fn(null,'登录成功'); //这地方有多种情况，后期可能会变   
       }
