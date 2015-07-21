@@ -33,14 +33,14 @@ router.get('/',function(req,res,next){
 
 router.get('/',function(req,res,next){
   var imgurl = '';
-  var sid = new Obj().newTmpSceneId();
+  var sid = new Obj().newTmpSceneId(0); //0=登录
   wx.createTmpQRCode(sid,function(err,data){
     var d = new Date();
     d.setSeconds(d.getSeconds()+data.expire_seconds);
     if(!err){
       var newData = {
         qrco_num:sid,
-        qrco_type:0,
+        qrco_type:0, //0=登录
         qrco_expire: d
       };
       Db.query('insert into qrcode set ?',newData,function(err,rows){
