@@ -34,7 +34,7 @@ router.get('/',function(req,res,next){
 router.get('/',function(req,res,next){
   var imgurl = '';
   var sid = new Obj().newTmpSceneId();
-  wx.createTmpQRCode(100001,function(err,data){
+  wx.createTmpQRCode(sid,function(err,data){
     var d = new Date();
     d.setSeconds(d.getSeconds()+data.expire_seconds);
     if(!err){

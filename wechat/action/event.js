@@ -35,7 +35,7 @@ module.exports = function(event, req, res, next){
                 res.reply(content); 
               }
               else{
-                res.reply('无效的二维码。(二维码号:' + event.EventKey + event.FromUserName +')' + err); 
+                res.reply('无效的二维码。(二维码号:' + event.EventKey + ' openid:' + event.FromUserName +')' + err); 
               }
             });
           }
@@ -128,7 +128,7 @@ module.exports = function(event, req, res, next){
         res.reply(content); 
       }
       else{
-        res.reply('无效的二维码。(二维码号:' + event.EventKey + event.FromUserName  + ')' + err ); 
+        res.reply('无效的二维码。(二维码号:' + event.EventKey + ' openid:' + event.FromUserName  + ')' + err ); 
       }
     });
   }
