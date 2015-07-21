@@ -35,7 +35,7 @@ module.exports = function(event, req, res, next){
                 res.reply(content); 
               }
               else{
-                res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+                res.reply('无效的二维码。(二维码号:' + event.EventKey + event.FromUserName +')' + err); 
               }
             });
           }
@@ -125,28 +125,16 @@ module.exports = function(event, req, res, next){
   else if(event.Event =='SCAN'){
     User.SCAN(event,function(err,content){
       if(!err){
-        //这个是登录，则要处理session
-        if(event.EventKey == 100001){
-          req.session.openid=event.FromUserName;
-          req.wxsession.openid=event.FromUserName;
-          req.wxsession.req.openid = event.FromUserName;
-          console.log('=============='+ req.wxsession.req);
-          console.log('######'+ req.wxsession.req.sessionID);
-          console.log(req.sessionID+'--login');
-        };
         res.reply(content); 
       }
       else{
-        if(event.EventKey == 100001){
-          res.reply( err + '(二维码号:' + event.EventKey + ')' + event.FromUserName);
-        }
-        else
-          res.reply('无活动可参与。(二维码号:' + event.EventKey + ')' + err); 
+        res.reply('无效的二维码。(二维码号:' + event.EventKey + event.FromUserName  + ')' + err ); 
       }
     });
   }
+  /////////////////////////////////////////////////////////////////////////////////////////////////
   else {
-  	res.reply('暂未支持! Coming soon!-1');
+  	res.reply('功能暂未支持!');
   }
 };
 

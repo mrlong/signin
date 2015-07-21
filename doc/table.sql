@@ -61,15 +61,16 @@ create table if not exists manager(
 )engine=innodb  default charset=utf8 comment='管理员';
 
 
-/*登录状态*/
-create table if not exists loginstatus(
-  logo_num int not null comment '登录的固定码 从100001开始',
-  logo_openid varchar(50) comment 'openid',
-  logo_expire timestamp comment '过期时间',
-  logo_do tinyint(1) default false comment '=true 表示已签到过'
+/*临时二维码*/
+create table if not exists qrcode(
+  qrco_num bigint not null comment '场境',
+  qrco_openid varchar(50) comment 'openid',
+  qrco_expire timestamp comment '过期时间',
+  qrco_use tinyint(1) default false comment '=true 表示已使用扫过了',
+  qrco_type int not null comment '类型 0=登录',
 
-  primary key(logo_num)
-)engine=innodb  default charset=utf8 comment='登录状态';
+  primary key(qrco_num,qrco_type)
+)engine=innodb  default charset=utf8 comment='临时二维码';
 
 
 

@@ -12,6 +12,8 @@ var urllib = require('urllib');
 var config = require('../config');
 
 var Api = require('../wechat/api');
+var OAuth = require('../wechat/oauth');
+
 
 
 //获取用户基本信息
@@ -135,18 +137,21 @@ exports.SCAN=function(event,fn){
     });
   }
   var content;
-  //登录时
-  if(key==100001){
-    Db.query('select * from manager where mana_openid=?',event.FromUserName,function(err,rows){
-      if(!err && rows.length>0){
-        if(fn) fn(null,'登录成功');
+  //临时二维护码
+  if(key>100000){
+    //查找二维码的临时库有没有
+    Db.query('update qrcode set qrco_use=true,qrco_openid=? where qrco_num=? and now()< qrco_expire',
+             [event.FromUserName key],function(err,data){
+      if(!err && data.changedRows>0){ 
+        if(fn) fn(null,'登录成功'); //这地方有多种情况，后期可能会变   
       }
       else{
         content = '登录失败';
-        if(fn) fn(new Error('登录失败'),content);
-      }
+        if(fn) fn(new Error('登录失败'),content);   
+      };
     });
   }
+  //固定二维护码
   else{
     Db.query('select * from meeting where meet_status !=0 and meet_sceneid=? order by meet_time desc ',key,function(err,rows){
       if(!err && rows.length>0){
@@ -243,6 +248,17 @@ exports.msgSignin=function(openid,data,cb){
     if(cb) cb(null);
   });
 };
+
+
+//
+// 生成可以oauth 授权的url 路径
+//
+exports.getAuthorizeURL=function(url){
+  var client = new OAuth(config.wechat.appid, config.wechat.appsecret);
+  return client.getAuthorizeURL(url);
+};
+
+
 
 
 
